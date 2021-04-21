@@ -1,1 +1,1 @@
-password = 'wea33pon'
+password = ''
