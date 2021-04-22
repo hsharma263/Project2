@@ -16,10 +16,10 @@ place VARCHAR(255)
 latitude FLOAT
 longitude FLOAT
 locationSource VARCHAR(20)
-City VARCHAR(50)
-County VARCHAR(50)
-State VARCHAR(50)
-Country VARCHAR(50)
+city VARCHAR(50)
+county VARCHAR(50)
+state VARCHAR(50)
+country VARCHAR(50)
 -
 
 time

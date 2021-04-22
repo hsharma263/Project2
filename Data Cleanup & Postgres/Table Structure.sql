@@ -19,10 +19,10 @@ CREATE TABLE "location" (
     "latitude" FLOAT   NOT NULL,
     "longitude" FLOAT   NOT NULL,
     "locationSource" VARCHAR(20)   NOT NULL,
-    "City" VARCHAR(50)   NOT NULL,
-    "County" VARCHAR(50)   NOT NULL,
-    "State" VARCHAR(50)   NOT NULL,
-    "Country" VARCHAR(50)   NOT NULL
+    "city" VARCHAR(50)   NOT NULL,
+    "county" VARCHAR(50)   NOT NULL,
+    "state" VARCHAR(50)   NOT NULL,
+    "country" VARCHAR(50)   NOT NULL
 );
 
 CREATE TABLE "time" (
