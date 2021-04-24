@@ -7,13 +7,11 @@ require([
     "esri/widgets/Legend",
     "esri/widgets/HistogramRangeSlider",
     "esri/smartMapping/statistics/histogram",
-    "esri/core/promiseUtils"
-  ], function(Map, GeoJSONLayer, SceneView, Basemap, TileLayer, Legend, HistogramRangeSlider, histogram, promiseUtils) {
+    "esri/core/promiseUtils"],
+    function(Map, GeoJSONLayer, SceneView, Basemap, TileLayer, Legend, 
+      HistogramRangeSlider, histogram, promiseUtils) {
   
-  
-//     /*****************************************
-//      * Define map and view
-//      *****************************************/
+  // Creating map 
   
     const map = new Map({
       basemap: new Basemap({
@@ -22,13 +20,9 @@ require([
           opacity: 0.7,
           minScale: 0
         })]
-      }),
-      // ground: {
-      //   surfaceColor: [255, 255, 255]
-      // }
+      })
     });
 
-  
     const view = new SceneView({
       container: "viewDiv",
       camera: {
@@ -59,10 +53,7 @@ require([
     });
   
   
-//     /*****************************************
-//      * Create GeoJSONLayer
-//      * from the USGS earthquake feed
-//      *****************************************/
+    // Get data from USGS feed
   
     // const url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson";
     const url =  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
@@ -71,7 +62,7 @@ require([
       url: url,
       copyright: "USGS Earthquakes",
       screenSizePerspectiveEnabled: false,
-      title: "Earthquakes in the last 30 days",
+      title: "Global Earthquakes in the past 30 days",
       popupTemplate: {
         title: "Earthquake Info",
         content: "Magnitude <b>{mag}</b> {type}. <br> <b>{place}</b> <br> <b>{time}</b>",
@@ -87,8 +78,7 @@ require([
     });
     map.add(earthquakesLayer);
   
-    // the number of earthquakes in each class is displayed in the legend
-  
+    
     const statDefinitions = [{
       onStatisticField:
         "CASE WHEN mag < 5.0 THEN 1 ELSE 0 END",
@@ -110,12 +100,33 @@ require([
       statisticType: "count"
     }];
   
-    // // the symbol for each earthquake class is composed of multiple symbol layers
+   
   
-    const baseSymbolLayer = {
+    const lowRiskSymbolLayer = {
       type: "icon",
       resource: { primitive: "circle"},
-      material: { color: [245, 116, 73, 0.9] },
+      material: { color: "#33FF3F" },
+      size: 3
+    };
+
+    const mediumRiskSymbolLayer = {
+      type: "icon",
+      resource: { primitive: "circle"},
+      material: { color: "#0F930D" },
+      size: 3
+    };
+
+    const highRiskSymbolLayer = {
+      type: "icon",
+      resource: { primitive: "circle"},
+      material: { color: "#B90AE0" },
+      size: 3
+    };
+
+    const severeRiskSymbolLayer = {
+      type: "icon",
+      resource: { primitive: "circle"},
+      material: { color: "#FB0000" },
       size: 3
     };
   
@@ -123,7 +134,7 @@ require([
       type: "icon",
       resource: { primitive: "circle"},
       material: { color: [245, 116, 73, 0] },
-      outline: {color: [245, 116, 73, 0.7], size: 1},
+      outline: {color: "#000000", size: 1},
       size: 20
     };
   
@@ -146,29 +157,37 @@ require([
           },
           classBreakInfos: [{
             minValue: -2,
+            maxValue: 2,
+            symbol: {
+              type: "point-3d",
+              symbolLayers: [lowRiskSymbolLayer]
+            },
+            label: annotate(statResults.minor) + " lower than 2. These are not usually felt, but can be detected. There are estimated to be around 900,000 per year."
+          },{
+            minValue: 2,
             maxValue: 5,
             symbol: {
               type: "point-3d",
-              symbolLayers: [baseSymbolLayer]
+              symbolLayers: [mediumRiskSymbolLayer]
             },
-            label: annotate(statResults.minor) + " lower than 5. They don't cause any significant damage."
+            label: annotate(statResults.minor) + " between 2 and 5. These are felt, but only cause minor damage. Estimated 30,000 per year "
           }, {
             minValue: 5,
             maxValue: 7,
             symbol: {
               type: "point-3d",
-              symbolLayers: [baseSymbolLayer, secondSymbolLayer]
+              symbolLayers: [highRiskSymbolLayer, secondSymbolLayer]
             },
-            label: annotate(statResults.medium) + " between 5 and 7. They can damage buildings and other structures in populated areas."
+            label: annotate(statResults.medium) + " between 5 and 7. They can damage buildings and other structures in populated areas. Estimated 600 per year"
           },
             {
             minValue: 7,
             maxValue: 10,
             symbol: {
               type: "point-3d",
-              symbolLayers: [baseSymbolLayer, secondSymbolLayer, thirdSymbolLayer]
+              symbolLayers: [severeRiskSymbolLayer, secondSymbolLayer, thirdSymbolLayer]
             },
-            label: annotate(statResults.major) + " larger than 7. These earthquakes are likely to cause damage even to earthquake resistant structures."
+            label: annotate(statResults.major) + " larger than 7. These cause serious damage and can destroy communities. Estimated to occur once in every 5 to 10 years."
           }]
         }
         earthquakesLayer.renderer = renderer;
@@ -184,10 +203,7 @@ require([
         return "0 earthquakes";
       }
   
-    // /*****************************************
-    //  * Create a histogram with a range slider
-    //  * to filter earthquakes based on magnitude
-    //  *****************************************/
+//  Histogram Slider
   
     view.whenLayerView(earthquakesLayer).then(function(lyrView) {
       const min = -2;
@@ -244,11 +260,6 @@ require([
     function transform(number) {
       return (Math.round(number * 100)/100).toString();
     }
-  
-    // /*****************************************
-    //  * Add side panel with legend and histogram
-    //  * to the view
-    //  *****************************************/
   
     const sidePanelInfo = document.getElementById("sidePanelInfo");
     view.ui.add(sidePanelInfo, "top-right");
