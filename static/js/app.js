@@ -136,13 +136,17 @@
        
         d3.json("../../Resources/Earthquakes.json").then((data) => {
             
+            var country = data[0].country;
+
             data.forEach((subject) => {
+                // var country = data.country;
+                // console.log(subject.country);
                 
                 selectSubject.append("option").text(subject.country);
             });
 
             // call the functions to display the data and the plots for default id - 940
-            buildPlot(subject[0].country);
+            buildPlot(country);
             // metadata(data.names[0]);
             
         })
