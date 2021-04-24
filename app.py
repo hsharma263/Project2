@@ -23,13 +23,13 @@ cursor = conn.cursor()
 @app.route("/")
 def home():
     # Find one record of data from the mongo database
-    cursor.execute("SELECT e.id,e.type,e.depth,e.mag,l.city,l.county,l.state,l.country FROM earthquake e, location l WHERE e.id = l.id")
+    cursor.execute("SELECT e.id,e.type,e.depth,e.mag,e.magtype,e.rootmeansquare,e.status,l.latitude, l.longitude, l.city,l.county,l.state,l.country FROM earthquake e, location l WHERE e.id = l.id")
     rows = cursor.fetchall()
 
     rowarray_list = []
 
     for row in rows:
-        t = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+        t = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12])
         rowarray_list.append(t)
 
     j = json.dumps(rowarray_list)
@@ -46,10 +46,15 @@ def home():
         d["type"] = row[1]
         d["depth"] = row[2]
         d["mag"] = row[3]
-        d["city"] = row[4]
-        d["county"] = row[5]
-        d["state"] = row[6]
-        d["country"] = row[7]
+        d["magtype"] = row[4]
+        d["rootmeansquare"] = row[5]
+        d["status"] = row[6]
+        d["latitude"] = row[7]
+        d["longitude"] = row[8]
+        d["city"] = row[9]
+        d["county"] = row[10]
+        d["state"] = row[11]
+        d["country"] = row[12]
         objects_list.append(d)
 
     j = json.dumps(objects_list)

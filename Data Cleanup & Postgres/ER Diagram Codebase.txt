@@ -4,8 +4,8 @@ id PK VARCHAR(50)
 type VARCHAR(50)
 depth FLOAT
 mag FLOAT
-magType VARCHAR(20)
-rootMeanSquare FLOAT
+magtype VARCHAR(20)
+rootmeansquare FLOAT
 status VARCHAR(30)
 -
 
@@ -26,5 +26,5 @@ time
 -----
 id VARCHAR(50) FK >- Earthquake.id
 time timestamp
-lastUpdDatetime timestamp
+lastupddatetime timestamp
 -
