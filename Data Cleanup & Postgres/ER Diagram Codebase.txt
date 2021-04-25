@@ -20,11 +20,19 @@ city VARCHAR(50)
 county VARCHAR(50)
 state VARCHAR(50)
 country VARCHAR(50)
+mindepth FLOAT
+maxdepth FLOAT
+minmag FLOAT
+maxmag FLOAT
+count VARCHAR(50)
+mindate DATE
+maxdate DATE
 -
 
 time
 -----
 id VARCHAR(50) FK >- Earthquake.id
 time timestamp
+date date
 lastupddatetime timestamp
 -

@@ -22,12 +22,20 @@ CREATE TABLE "location" (
     "city" VARCHAR(50)   NOT NULL,
     "county" VARCHAR(50)   NOT NULL,
     "state" VARCHAR(50)   NOT NULL,
-    "country" VARCHAR(50)   NOT NULL
+    "country" VARCHAR(50)   NOT NULL,
+    "mindepth" FLOAT   NOT NULL,
+    "maxdepth" FLOAT   NOT NULL,
+    "minmag" FLOAT   NOT NULL,
+    "maxmag" FLOAT   NOT NULL,
+    "count" VARCHAR(50)   NOT NULL,
+    "mindate" DATE   NOT NULL,
+    "maxdate" DATE   NOT NULL
 );
 
 CREATE TABLE "time" (
     "id" VARCHAR(50)   NOT NULL,
     "time" timestamp   NOT NULL,
+    "date" date   NOT NULL,
     "lastupddatetime" timestamp   NOT NULL
 );
 
