@@ -13,15 +13,17 @@
 
   <!-- NAVBAR CODE -->
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
+        
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://127.0.0.1:5501/templates/index.html#">Homepage</a>
+
+        <a class="navbar-brand" href="index.html">Homepage</a>
       </div>
  
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,6 +41,7 @@
   
 
   <div class="container">
+
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1>Earthquake Analysis Dashboard</h1>
@@ -51,12 +54,15 @@
 
       <div class="col-md-2">
 
+        <!-- Country Selection Dropdown -->
         <div class="well">
           <h5><b>Country Selection:</b></h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
 
-        <div class="panel panel-primary">
+
+        <!-- Earthquake Info Table -->
+        <div class="panel panel-danger">
           <div class="panel-heading">
             <h3 class="panel-title">Earthquake Info</h3>
           </div>
@@ -66,38 +72,39 @@
       </div>
 
 
-      <div class="col-md-5">
+      <!-- Bubble Chart -->
+      <div class="col-md-10">
         <div id="bubble"></div>
       </div>
 
-
-      <div class="col-md-5">
-        <div id="NA"></div>
-      </div>
-
     </div>
+
 
     <!-- Added this to create space between 2 charts -->
     <div></div>
     <div><hr></div>
 
+
     <div class="row">
+
+      <!-- Added to move Map Chart right side -->
       <div class="col-md-2">
         <div id="NA"></div>
       </div>
 
+      <!-- Map Chart -->
       <div class="col-md-10">
-        <div id="bar"></div>
+        <div id="map"></div>
       </div>
     </div>
 
 
   </div>
 
+  <!-- Required Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="../static/js/app.js"></script>
-  <!-- <script src="./static/js/bonus.js"></script> -->
   <script src="../Resources/Earthquakes.json"></script>
   
 </body>

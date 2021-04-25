@@ -1,67 +1,31 @@
 
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // the below function will build both Bar and Bubble charts
+    // the below function will build both and Bubble and Map charts
     function buildPlot(country){
         
         d3.json("../../Resources/Earthquakes.json").then((data)=> {
             //console.log(data)
 
             // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            // Bar Plot
+            // Pull the required data for the plots
 
             // filter sample values by country 
             var samples = data.filter(s => s.country === country);
             // console.log(samples);
 
-
-            // get only top 10 sample id's
-            var sampleId = samples.slice(0, 10).map(c => (c.id))
+            // get sample id's
+            // var sampleId = samples.slice(0, 10).map(c => (c.id))
             // console.log(sampleId);
 
-            // get only top 10 sample magnitude
-            var sampleMag = samples.slice(0, 10).map(c => (c.mag))
+            // get magnitude
+            // var sampleMag = samples.slice(0, 10).map(c => (c.mag))
+            var sampleMag = samples.map(c => (c.mag))
             // console.log(sampleMag);
 
-            // get only top 10 sample cities
-            var sampleCity = samples.slice(0, 10).map(c => (c.city))
+            // get cities
+            var sampleCity = samples.map(c => (c.city))
             // console.log(sampleCity);
-
-
-            var trace1 = {
-                x: sampleId, //["Kettering", "Dubai", "Geeveston", "Denmark", "Panvel", "Chicago", "NewYork", "Goa", "Mumbai", "Oregon"],  
-                y: sampleMag, //[4.9, 6, 4.9, 5, 4.4, 5, 4.7, 4.9, 5, 4.3],
-                type: 'bar',
-                orientation: 'v',
-                marker: {
-                    color: ['rgba(204,204,204,1)', 'rgba(222,45,38,1)', 'rgba(255,235,205,1)', 'rgba(210,105,30,1)', 'rgba(139,0,139,1)','rgba(143,188,143,1)', 'rgba(178,34,34,1)', 'rgba(255,105,180,1)', 'rgba(32,178,170,1)', 'rgba(25,25,112,1)']
-                }
-                }
-
-
-
-            //console.log(trace1);
-
-            var bar_data = [trace1];
-        
-            var bar_layout = {
-                title: "Countrywise Top 10 Earthquakes",
-                height: 800,
-                width: 800,
-                showlegend: false,
-                xaxis: {
-                    ticktext: sampleCity,
-                    tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                },
-                font: {
-                    family: 'Arial, monospace',
-                    size: 18,
-                    color: '#7f7f7f'
-                  }
-            };
-
-            // // create the bar plot
-            Plotly.newPlot("bar", bar_data, bar_layout)
 
 
             // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -85,7 +49,14 @@
 
             // set the layout for the bubble plot
             var bubble_layout = {
-                title: "Countrywise Top 10 Earthquakes",
+                title: "Countrywise Earthquakes",
+                xaxis: {
+                    title: 'Cities (Nearby)',
+                    automargin: false
+                  },
+                  yaxis: {
+                    title: 'Magnitudes'
+                  },
                 height: 600,
                 width: 1000,
                 font: {
@@ -97,16 +68,54 @@
 
             // create the bubble plot
             Plotly.newPlot("bubble", bubble_data, bubble_layout);
+
+
+
+            // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            // Map Plot
+
+            // get longitude
+            var longitude = samples.map(c => (c.longitude))
+            console.log(longitude);
+
+            // get latitude
+            var latitude = samples.map(c => (c.latitude))
+            console.log(latitude);
+
+            var data = [{
+                type: "scattermapbox",
+                mode: "lines",
+                fill: "toself",
+                lon: longitude,
+                lat: latitude,
+                marker: { size: 10, color: "blue" }
+                }]
+        
+            var layout = {
+                title: "Countrywise Filled Area Map For Earthquakes",
+                mapbox: {style: "stamen-terrain", center: {lon: 40, lat: 20}, 'zoom': 1.5},
+                showlegend: false,
+                width:1000, height: 700,
+                font: {
+                    family: 'Arial',
+                    size: 15,
+                    color: '#7f7f7f'
+                  }
+            }
             
+            Plotly.newPlot("map", data, layout)
+
+                        
         });
     };
 
+    // Test Run
     // buildPlot('AU');
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 
-    // below function will build the Demographic Info table
+    // below function will build the Earthquake Info table
     function metadata(subject) {
         d3.json("../../Resources/Earthquakes.json").then((data) => {
 
@@ -143,7 +152,7 @@
 
 
     // the below function will be called once user selects any name from dropdown
-    // It will inturn call child build plot function to display the Bar and Bubble charts
+    // It will inturn call child build plot function to display Bubble and Map charts
     function optionChanged(newCountry) {
         buildPlot(newCountry);
         metadata(newCountry);
@@ -155,7 +164,7 @@
 
     // the below function will show all the names under dropdown
     // it will append all those names to dropdown
-    // it will also display default Bar and Bubble charts for - 940
+    // it will also display default Bubble, Map charts and Earthquake Info table for - AU
     function init() {
         
         var selectSubject = d3.select("#selDataset");
@@ -189,7 +198,7 @@
     
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
-    // call the init function to display default Bar, Bubble charts and Demographic Info table for - 940
+    // call the init function to display default Bubble, Map charts and Earthquake Info table for - AU
     init();
 
 
