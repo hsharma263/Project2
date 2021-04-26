@@ -24,7 +24,7 @@ function magnitudes(earthquakeData){
         var timestamp = earthquakeData[i].properties.time;
         var convertedDate = new Date(timestamp);
 
-         var day = convertedDate.getDate();
+        var day = convertedDate.getDate();
         var month =  convertedDate.getMonth() + 1;
         var year = convertedDate.getFullYear();
         var hours = convertedDate.getHours();
