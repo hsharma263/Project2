@@ -77,7 +77,6 @@ require([
       }
     });
     map.add(earthquakesLayer);
-  
     
     const statDefinitions = [{
       onStatisticField:
@@ -100,7 +99,6 @@ require([
       statisticType: "count"
     }];
   
-   
   
     const lowRiskSymbolLayer = {
       type: "icon",
@@ -205,13 +203,13 @@ require([
   
 //  Histogram Slider
   
-    view.whenLayerView(earthquakesLayer).then(function(lyrView) {
+    view.whenLayerView(earthquakesLayer).then(function(layerView) {
       const min = -2;
       const max = 10;
       histogram({
         layer: earthquakesLayer,
         field: "mag",
-        numBins: 30,
+        numBins: 40,
         minValue: min,
         maxValue: max
       }).then(function(histogramResponse) {
@@ -236,7 +234,7 @@ require([
   
         const filterByHistogramRange = promiseUtils.debounce(function() {
           const filterClause = slider.generateWhereClause("mag");
-          lyrView.filter = {
+          layerView.filter = {
             where: filterClause
           };
           return updateHistogramCount(filterClause, slider.values);
