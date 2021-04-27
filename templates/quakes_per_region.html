@@ -5,52 +5,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Depth vs Magnitude</title>
+  <title> Earthquake Analysis </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  
 </head>
 
 <body>
- <!-- NAVBAR CODE -->
- <nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
 
-      <a class="navbar-brand" href="http://127.0.0.1:5501/templates/index.html#">Homepage</a>
+  <!-- NAVBAR CODE -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="index.html">Homepage</a>
+      </div>
+ 
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="nav-link"><a href="http://127.0.0.1:5501/globe.html">Global Earthquakes<span class="sr-only">(current)</span></a></li>
+          <li><a href="http://127.0.0.1:5501/depth_line_chart.html">Depth vs Magnitude</a></li>
+          <li><a href="#">Plot 2</a></li>
+          <li><a href="#">Etc.</a></li>
+        </ul>
+      </div>  
+    </div>  
+  </nav>
+
+  <!-- End navbar code -->
+  
+
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Bubble Chart -->
+      <div class="col-md-12">
+        <div id="bar"></div>
+      </div>
+
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="nav-link"><a href="http://127.0.0.1:5501/templates/globe.html">Global Earthquakes<span class="sr-only">(current)</span></a></li>
-        <li><a href="http://127.0.0.1:5501/templates/depth_line_chart.html">Depth vs Magnitude</a></li>
-        <li><a href="http://127.0.0.1:5501/templates/quakes_per_region.html">Earthquakes by Magnitude Type</a></li>
-      </ul>
-    </div>  
-  </div>  
-</nav>
+  </div>
 
-  <!-- The div that holds our chart -->
-  <div id="chart"></div>
-
-  <!-- D3 JavaScript -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-
-  <!-- Apex Charts -->
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-  <!-- Our JavaScript -->
-  <script type="text/javascript" src="../static/js/quakes_per_region.js"></script>
-
-
-  <b>CRAP</b><br>
-  <p>MORE CRAP</p>
+  <!-- Required Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="quakes_per_region.js"></script>
+  <script src="Resources/Earthquakes.json"></script>
+  
 </body>
 
 </html>

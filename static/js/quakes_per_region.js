@@ -1,5 +1,27 @@
-// CODE TO GET VALUES
-// d3.json("../../Resources/Earthquakes.json").then((data)=> {
+d3.json("Resources/Earthquakes.json").then((data)=> {
+
+    var trace1 = {
+        x: [160,6,2870,2,6271,7,1,13,22],
+        y: ['mb','mb_lg','md','mh','ml','mw','mwb','mwr','mww'],
+        // text: otuLabels,
+        type: 'bar',
+        orientation: 'h'
+    };
+
+    console.log(trace1);
+
+    var bar_data = [trace1];
+
+    var bar_layout = {
+        title: "Top 10 OTU's for individual",
+        height: 600,
+        width: 800
+    };
+
+    // create the bar plot
+    Plotly.newPlot("bar", bar_data, bar_layout)
+
+});
 
 //   // var arr = data.map(a => a.magtype);
 //   var arr = data.map(a => a.country );
@@ -107,80 +129,80 @@
 
 // //-----------------------------------------------------------------------------------------------------------
 // // PLOTTING THE GRAPH (ALL MAGTYPES)
-var options = {
-  series: [{
-  data: [160,6,2870,2,6271,7,1,13,22]
-}],
-  chart: {
-  type: 'bar',
-  height: 380
-},
-plotOptions: {
-  bar: {
-    barHeight: '100%',
-    distributed: true,
-    horizontal: true,
-    dataLabels: {
-      position: 'bottom'
-    },
-  }
-},
-colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
-  '#f48024'
-],
-dataLabels: {
-  enabled: true,
-  textAnchor: 'start',
-  style: {
-    colors: ['#fff']
-  },
-  formatter: function (val, opt) {
-    return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
-  },
-  offsetX: 0,
-  dropShadow: {
-    enabled: true
-  }
-},
-stroke: {
-  width: 1,
-  colors: ['#fff']
-},
-xaxis: {
-  categories: ['mb','mb_lg','md','mh','ml','mw','mwb','mwr','mww'
-  ],
-},
-yaxis: {
-  labels: {
-    show: false
-  }
-},
-title: {
-    text: 'Custom DataLabels',
-    align: 'center',
-    floating: true
-},
-subtitle: {
-    text: 'Category Names as DataLabels inside bars',
-    align: 'center',
-},
-tooltip: {
-  theme: 'dark',
-  x: {
-    show: false
-  },
-  y: {
-    title: {
-      formatter: function () {
-        return ''
-      }
-    }
-  }
-}
-};
+// var options = {
+//   series: [{
+//   data: [160,6,2870,2,6271,7,1,13,22]
+// }],
+//   chart: {
+//   type: 'bar',
+//   height: 380
+// },
+// plotOptions: {
+//   bar: {
+//     barHeight: '100%',
+//     distributed: true,
+//     horizontal: true,
+//     dataLabels: {
+//       position: 'bottom'
+//     },
+//   }
+// },
+// colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
+//   '#f48024'
+// ],
+// dataLabels: {
+//   enabled: true,
+//   textAnchor: 'start',
+//   style: {
+//     colors: ['#fff']
+//   },
+//   formatter: function (val, opt) {
+//     return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
+//   },
+//   offsetX: 0,
+//   dropShadow: {
+//     enabled: true
+//   }
+// },
+// stroke: {
+//   width: 1,
+//   colors: ['#fff']
+// },
+// xaxis: {
+//   categories: ['mb','mb_lg','md','mh','ml','mw','mwb','mwr','mww'
+//   ],
+// },
+// yaxis: {
+//   labels: {
+//     show: false
+//   }
+// },
+// title: {
+//     text: 'Custom DataLabels',
+//     align: 'center',
+//     floating: true
+// },
+// subtitle: {
+//     text: 'Category Names as DataLabels inside bars',
+//     align: 'center',
+// },
+// tooltip: {
+//   theme: 'dark',
+//   x: {
+//     show: false
+//   },
+//   y: {
+//     title: {
+//       formatter: function () {
+//         return ''
+//       }
+//     }
+//   }
+// }
+// };
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#chart"), options);
+// chart.render();
 
 // // PLOTTING THE GRAPH (TOP 3)
 // var options = {
@@ -255,4 +277,4 @@ chart.render();
 // };
 
 // var chart = new ApexCharts(document.querySelector("#chart"), options);
-// chart.render();
+// chart.render()
