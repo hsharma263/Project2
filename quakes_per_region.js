@@ -1,29 +1,51 @@
-// CODE TO GET VALUES
-d3.json("../../Resources/Earthquakes.json").then((data)=> {
+d3.json("Resources/Earthquakes.json").then((data)=> {
 
-  // var arr = data.map(a => a.magtype);
-  var arr = data.map(a => a.country );
+    var trace1 = {
+        x: [160,6,2870,2,6271,7,1,13,22],
+        y: ['mb','mb_lg','md','mh','ml','mw','mwb','mwr','mww'],
+        // text: otuLabels,
+        type: 'bar',
+        orientation: 'h'
+    };
 
-function foo(arr) {
-    var a = [], b = [], prev;
+    console.log(trace1);
+
+    var bar_data = [trace1];
+
+    var bar_layout = {
+        title: "Top 10 OTU's for individual",
+        height: 600,
+        width: 800
+    };
+
+    // create the bar plot
+    Plotly.newPlot("bar", bar_data, bar_layout)
+
+});
+
+//   // var arr = data.map(a => a.magtype);
+//   var arr = data.map(a => a.country );
+
+// function foo(arr) {
+//     var a = [], b = [], prev;
     
-    arr.sort();
-    for ( var i = 0; i < arr.length; i++ ) {
-        if ( arr[i] !== prev ) {
-            a.push(arr[i]);
-            b.push(1);
-        } else {
-            b[b.length-1]++;
-        }
-        prev = arr[i];
-    }
+//     arr.sort();
+//     for ( var i = 0; i < arr.length; i++ ) {
+//         if ( arr[i] !== prev ) {
+//             a.push(arr[i]);
+//             b.push(1);
+//         } else {
+//             b[b.length-1]++;
+//         }
+//         prev = arr[i];
+//     }
     
-    return [a, b];
-}
+//     return [a, b];
+// }
 
-var result = foo(arr);
-document.write('[' + result[0] + ']<br>[' + result[1] + ']') 
- });
+// var result = foo(arr);
+// document.write('[' + result[0] + ']<br>[' + result[1] + ']') 
+//  });
 
 // // ----------------------------------------------------------------------------------------------------------------------
 // // PLOTTING THE GRAPH (ALL COUNTRIES)
@@ -255,4 +277,4 @@ document.write('[' + result[0] + ']<br>[' + result[1] + ']')
 // };
 
 // var chart = new ApexCharts(document.querySelector("#chart"), options);
-// chart.render();
+// chart.render()
