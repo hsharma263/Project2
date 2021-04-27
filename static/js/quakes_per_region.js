@@ -1,4 +1,4 @@
-d3.json("Resources/Earthquakes.json").then((data)=> {
+d3.json("../../Resources/Earthquakes.json").then((data)=> {
 
     var trace1 = {
         x: [160,6,2870,2,6271,7,1,13,22],
