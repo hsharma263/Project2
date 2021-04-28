@@ -1,5 +1,5 @@
 # import dependencies
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template
 from config import password
 from sqlalchemy import create_engine
 import psycopg2, json, collections
@@ -7,8 +7,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import datetime as dt
-from bson import json_util
-import json
+
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -17,7 +16,7 @@ app = Flask(__name__)
 # connect to Postgres
 #engine = create_engine(f"postgresql://postgres:{password}@localhost/Earthquakes_db")
 #conn = engine.connect()
-conn = psycopg2.connect(host='localhost', dbname='Earthquakes_db', user='postgres', password='wea33pon')
+conn = psycopg2.connect(host='localhost', dbname='Earthquakes_db', user='postgres', password=f"{password}")
 cursor = conn.cursor()
 
 
@@ -71,7 +70,7 @@ def home():
     with open("Resources/Earthquakes.json", "w") as f:
         f.write(j)
 
-    conn.close()
+    # conn.close()
 
     # Return template and data
     return render_template("index.html")
