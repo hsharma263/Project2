@@ -49,9 +49,9 @@
 
             // set the layout for the bubble plot
             var bubble_layout = {
-                title: "Countrywise Earthquakes",
+                title: "Countrywise Earthquakes (Cities vs Magnitudes)",
                 xaxis: {
-                    title: 'Cities (Nearby)',
+                    title: 'Affected Cities (Nearby)',
                     automargin: false
                   },
                   yaxis: {

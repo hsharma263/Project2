@@ -13,9 +13,8 @@ import datetime as dt
 app = Flask(__name__)
 
 
+
 # connect to Postgres
-#engine = create_engine(f"postgresql://postgres:{password}@localhost/Earthquakes_db")
-#conn = engine.connect()
 conn = psycopg2.connect(host='localhost', dbname='Earthquakes_db', user='postgres', password=f"{password}")
 cursor = conn.cursor()
 
@@ -71,6 +70,7 @@ def home():
         f.write(j)
 
     # conn.close()
+
 
     # Return template and data
     return render_template("index.html")
