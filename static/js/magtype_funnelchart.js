@@ -54,3 +54,31 @@ am4core.ready(function() {
     chart.legend.margin(5,5,20,5);
     
     }); // end am4core.ready()
+
+
+// // GETTING OUR DATA
+//     d3.json("../../Resources/Earthquakes.json").then((data)=> {
+
+//         var arr = data.map(a => a.magtype);
+      
+//       function foo(arr) {
+//           var a = [], b = [], prev;
+          
+//           arr.sort();
+//           for ( var i = 0; i < arr.length; i++ ) {
+//               if ( arr[i] !== prev ) {
+//                   a.push(arr[i]);
+//                   b.push(1);
+//               } else {
+//                   b[b.length-1]++;
+//               }
+//               prev = arr[i];
+//           }
+          
+//           return [a, b];
+//       }
+      
+//       var result = foo(arr);
+//       document.write('[' + result[0] + ']<br>[' + result[1] + ']') 
+//        });
+      
