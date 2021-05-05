@@ -5,3 +5,9 @@ In this project we have used the USGS Earthquake Live Feed to examine different 
 While we try and use the Live Feeds for most of our visualizations, some needed the data to be cleaned and so, we downloaded a static file of the previous 30 days of earthquake data, cleaned this, and implemented it for our Flask app and other functions. 
 
 We utilized ApexCharts Javascript Library to create the line chart for depth vs magnitude and we used AmCharts Javascript Library to create our chart of the different magnitude types. 
+
+Presentation Deck -
+https://docs.google.com/presentation/d/1aF8i48OPGWfRhniaUI-A6yTcmXMikzgWf4jByHAC2t8/edit#slide=id.p
+
+Coding Approach -
+![image](https://user-images.githubusercontent.com/71988949/116790320-18df8a80-aa79-11eb-94c1-25dccc13e247.png)
